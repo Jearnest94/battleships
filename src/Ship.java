@@ -19,7 +19,6 @@ public class Ship {
     public String getSymbol() {
         return symbol;
     }
-
     public int getXPos() {
         return xPos;
     }
@@ -33,6 +32,15 @@ public class Ship {
         return orientation;
     }
 
+    public void setXPos(int xPos) {
+        this.xPos = xPos;
+    }
+    public void setYPos(int yPos) {
+        this.yPos = yPos;
+    }
+    public void setOrientation(String orientation) {
+        this.orientation = orientation;
+    }
 
 
 }
