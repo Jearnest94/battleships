@@ -46,7 +46,7 @@ public class Game {
                 //Bomb connects with ship:
                 if (enemyMap.getMap()[yBomb][xBomb].matches("@ |# |& ")) {
                     Utilities.playSound("FireHit.wav");
-                    System.out.println("Hit! Fire again.");
+                    System.out.println("Hit!");
                     hitScanMap.getMap()[yBomb][xBomb] = "X ";
                     enemyMap.getMap()[yBomb][xBomb] = "X ";
 
@@ -96,7 +96,7 @@ public class Game {
     }
 
     public boolean winCondition(int hitCount) {
-        if (hitCount < 2) {
+        if (hitCount < 10) {
             return false;
         } else
             return true;
