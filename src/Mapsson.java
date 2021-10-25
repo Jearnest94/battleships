@@ -36,7 +36,6 @@ public class Mapsson {
         String symbol = ship.getSymbol();
         String orientation = ship.getOrientation();
 
-
         //Kollar om det är vatten på X-axeln
         if (orientation.equals("Horizontal")) {
             if (xPos + length >= xSize) {
