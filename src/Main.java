@@ -13,7 +13,9 @@ public class Main {
         int menuSelection;
 
         JOptionPane.showMessageDialog(null, "Välkommen till Sänka Skepp. 8)");
+        Utilities.playSound("battleships.wav");
 
+        //Menu
         while (true) {
             System.out.println("- Battleships -");
             System.out.println("1) Play");
@@ -22,8 +24,9 @@ public class Main {
             System.out.println("4) About");
             System.out.println("5) Quit");
             menuSelection = input.nextInt();
+
             if (menuSelection == 1) {
-                //Create maps through class: "Mapsson"
+                //Create all maps through class: "Mapsson"
                 //Default map is 12x12 2D-array filled with: "~ ", which represents water.
                 Mapsson playerOneMap = new Mapsson(1, xMapSize, yMapSize);
                 Mapsson playerTwoMap = new Mapsson(2, xMapSize, yMapSize);
@@ -74,7 +77,7 @@ public class Main {
                 break;
             }
 
-            //Set map-size
+            //Set map-size. (Default is 12 x 12)
             if (mapsize) {
                 System.out.println("Map Size: (Default 12 x 12)");
                 System.out.print("X: ");
@@ -85,11 +88,7 @@ public class Main {
                 System.out.println("Map size set to " + xMapSize + " x " + yMapSize);
                 System.out.println();
                 mapsize = false;
-            } else {
-                xMapSize = 12;
-                yMapSize = 12;
             }
-
 
         }
 
