@@ -7,6 +7,10 @@ import java.util.Scanner;
 
 public class Utilities {
 
+    /**
+     *
+     * @param arr Prints 2 dimensional array.
+     */
     public static void printArray(String[][] arr) {
         for (int i = 0; i < arr.length; i++) {
             for (int j = 0; j < arr[i].length; j++) {
@@ -17,12 +21,19 @@ public class Utilities {
 
     }
 
+    /**
+     * Waits for user input. Useful for passing device between users without revealing information.
+     */
     public static void pressEnter() {
         System.out.println("<Press Enter to continue>");
         Scanner input = new Scanner(System.in);
         input.nextLine();
     }
 
+    /**
+     *
+     * @param musicLocation Plays sound file in specified directory.
+     */
     public static void playSound(String musicLocation){
         try
         {

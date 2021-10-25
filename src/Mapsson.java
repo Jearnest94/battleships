@@ -1,5 +1,9 @@
 import java.util.ArrayList;
 
+/**
+ * Map-class
+ * Contains x-size, y-size, 2d String array and player ID
+ */
 public class Mapsson {
 
     private final int xSize;
@@ -29,6 +33,12 @@ public class Mapsson {
         return playerID;
     }
 
+    /**
+     *
+     * @param ship contains ship length, x-position, y-position, ship symbol and ship orientation
+     * @return ship placement failed or successful boolean
+     * (Checks if ship overextends map size and if there is already a ship on designated coordinates)
+     */
     public boolean addShip(Ship ship) {
         int length = ship.getLength();
         int xPos = ship.getXPos();
@@ -36,19 +46,23 @@ public class Mapsson {
         String symbol = ship.getSymbol();
         String orientation = ship.getOrientation();
 
-        //Kollar om det är vatten på X-axeln
+
+        //Does ship fit on map?
         if (orientation.equals("Horizontal")) {
             if (xPos + length >= xSize) {
                 return false;
             }
+            //Is there water where I want to place my ship?
             for (int j = xPos; j < xPos + length; j++) {
                 if (!map[yPos][j].equals("~ ")) {
                     return false;
                 }
             }
+            //Prints ship with appropriate Symbol on map
             for (int j = xPos; j < xPos + length; j++)
                 map[yPos][j] = symbol;
         } else {
+            //Same as above but x-axis instead of y-axis
             if (yPos + length >= ySize) {
                 return false;
             }

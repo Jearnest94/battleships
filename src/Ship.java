@@ -1,13 +1,20 @@
 public class Ship {
 
-    private String symbol;
-    private int length;
+    private final String symbol;
+    private final int length;
     private int xPos;
     private int yPos;
     private String orientation;
 
 
-    //Kalla på konstruktorn för att skapa ett nytt skepp (Nyckelordet 'new')
+    /**
+     * Ship object contains:
+     * @param symbol Ship symbol
+     * @param xPos X position
+     * @param yPos Y position
+     * @param length Ship length
+     * @param orientation Ship orientation (Horizontal/Vertical)
+     */
     public Ship(String symbol, int xPos, int yPos, int length, String orientation) {
         this.symbol = symbol;
         this.xPos = xPos;
