@@ -12,8 +12,7 @@ public class Main {
         int yMapSize = 12;
         int menuSelection;
 
-        JOptionPane.showMessageDialog(null, "Välkommen till Sänka Skepp. 8)");
-        Utilities.playSound("battleships.wav");
+        //Utilities.playSound("battleships.wav");
 
         //Menu
         while (true) {

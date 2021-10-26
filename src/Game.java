@@ -31,6 +31,7 @@ public class Game {
      * @param hitScanMap Enemy map without enemy ships.
      * @param enemyMap   Enemy map. To check if bomb placement connects.
      */
+
     public void attackPhase(Scanner input, Mapsson playerMap, Mapsson hitScanMap, Mapsson enemyMap) {
         boolean playerTurn = true;
         while (playerTurn) {
@@ -121,52 +122,48 @@ public class Game {
         shipList.add(shipC);
 
         for (Ship ship : shipList) {
-            //Set ship coordinates.
-            System.out.println("<Player " + playerMap.getPlayerID() + "> Placement Turn");
-            System.out.print("Ship: ");
-            for (int i = 0;i < ship.getLength();i++) {
-                System.out.print(ship.getSymbol());
-            }
-            System.out.println();
-            System.out.print("X: ");
-            ship.setXPos(input.nextInt() - 1);
-            System.out.print("Y: ");
-            ship.setYPos(input.nextInt() - 1);
+            placeShip(input, ship, playerMap);
+        }
+        Utilities.pressEnter();
 
-            //Set Horizontal/Vertical.
-            System.out.println("Set orientation:");
-            System.out.println("1) Horizontal");
-            System.out.println("2) Vertical");
-            int select = input.nextInt();
-            if (select == 1) {
-                ship.setOrientation("Horizontal");
-            } else {
-                ship.setOrientation("Vertical");
-            }
+    }
 
-            //Check for ships on placement Coordinates.
-            if (playerMap.addShip(ship)) {
-                playerMap.addShip(ship);
-                Utilities.printArray(playerMap.getMap());
-                System.out.println("Ship placed successfully.");
-            } else {
-                Utilities.printArray(playerMap.getMap());
-                System.out.println("Ship placement failed.");
-            }
-/*
-            if (playerMap.getMap()[ship.getYPos()][ship.getXPos()].matches("@ |# |& ")) {
-                Utilities.printArray(playerMap.getMap());
-                System.out.println("Ship placement failed. Legacy");
-            } else {
-                playerMap.addShip(ship);
-                Utilities.printArray(playerMap.getMap());
-                System.out.println("Ship placed successfully. Legacy");
-            }
- */
+    private void placeShip(Scanner input, Ship ship, Mapsson playerMap) {
+        //Set ship coordinates.
+        System.out.println("<Player " + playerMap.getPlayerID() + "> Placement Turn");
+        System.out.print("Ship: ");
+        for (int i = 0; i < ship.getLength(); i++) {
+            System.out.print(ship.getSymbol());
+        }
+        System.out.println();
+        System.out.print("X: ");
+        ship.setXPos(input.nextInt() - 1);
+        System.out.print("Y: ");
+        ship.setYPos(input.nextInt() - 1);
 
+        //Set Horizontal/Vertical.
+        System.out.println("Set orientation:");
+        System.out.println("1) Horizontal");
+        System.out.println("2) Vertical");
+        int select = input.nextInt();
+        if (select == 1) {
+            ship.setOrientation("Horizontal");
+        } else {
+            ship.setOrientation("Vertical");
         }
 
-        Utilities.pressEnter();
+        //Check for ships on placement Coordinates.
+        if (playerMap.addShip(ship)) {
+            playerMap.addShip(ship);
+            Utilities.printArray(playerMap.getMap());
+            System.out.println("Ship placed successfully.");
+        } else {
+            Utilities.printArray(playerMap.getMap());
+            System.out.println("Ship placement failed.");
+            placeShip(input, ship, playerMap);
+        }
+
+
 
 
     }
