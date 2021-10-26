@@ -12,7 +12,10 @@ public class Main {
         int yMapSize = 12;
         int menuSelection;
 
-        //Utilities.playSound("battleships.wav");
+
+
+        JOptionPane.showMessageDialog(null, "Welcome to Battleships, captain!");
+        Utilities.playSound("battleships.wav");
 
         //Menu
         while (true) {
