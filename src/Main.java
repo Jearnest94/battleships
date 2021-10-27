@@ -12,8 +12,6 @@ public class Main {
         int yMapSize = 12;
         int menuSelection;
 
-
-
         JOptionPane.showMessageDialog(null, "Welcome to Battleships, captain!");
         Utilities.playSound("battleships.wav");
 
@@ -39,8 +37,12 @@ public class Main {
                 Game game = new Game();
 
                 //Initializes ship placement phase.
-                game.placementPhase(input, playerOneMap);
-                game.placementPhase(input, playerTwoMap);
+                if (gameModeCPU) {
+
+                } else {
+                    game.placementPhase(input, playerOneMap);
+                    game.placementPhase(input, playerTwoMap);
+                }
 
                 //Runs attackPhase-method until a player wins. Alternates between player one and player two.
                 while (true) {
@@ -56,13 +58,11 @@ public class Main {
             } else if (menuSelection == 2) {
                 if (gameModeCPU) {
                     gameModeCPU = false;
-                    System.out.println();
-                    System.out.println("2-Player mode enabled.");
+                    System.out.println("\n2-Player mode enabled.");
                     Utilities.pressEnter();
                 } else if (!gameModeCPU) {
                     gameModeCPU = true;
-                    System.out.println();
-                    System.out.println("CPU-mode enabled.");
+                    System.out.println("\nCPU-mode enabled.");
                     Utilities.pressEnter();
                 }
             } else if (menuSelection == 3) {

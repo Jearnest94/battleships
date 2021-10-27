@@ -152,7 +152,7 @@ public class Game {
             ship.setOrientation("Vertical");
         }
 
-        //Check for ships on placement Coordinates.
+        //Check if ship placement is valid, else try again
         if (playerMap.addShip(ship)) {
             playerMap.addShip(ship);
             Utilities.printArray(playerMap.getMap());
@@ -162,9 +162,6 @@ public class Game {
             System.out.println("Ship placement failed.");
             placeShip(input, ship, playerMap);
         }
-
-
-
 
     }
 

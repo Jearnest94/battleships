@@ -6,6 +6,8 @@ import java.util.ArrayList;
  */
 public class Mapsson {
 
+
+
     private final int xSize;
     private final int ySize;
     private final String[][] map;
@@ -31,6 +33,14 @@ public class Mapsson {
 
     public int getPlayerID() {
         return playerID;
+    }
+
+    public int getxSize() {
+        return xSize;
+    }
+
+    public int getySize() {
+        return ySize;
     }
 
     /**
