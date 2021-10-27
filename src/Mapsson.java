@@ -1,12 +1,9 @@
-import java.util.ArrayList;
-
 /**
  * Map-class
  * Contains x-size, y-size, 2d String array and player ID
  */
+
 public class Mapsson {
-
-
 
     private final int xSize;
     private final int ySize;

@@ -1,4 +1,5 @@
 import javax.swing.*;
+import java.util.Random;
 import java.util.Scanner;
 
 public class Main {
@@ -8,8 +9,8 @@ public class Main {
         Scanner input = new Scanner(System.in);
         boolean gameModeCPU = false;
         boolean mapsize = false;
-        int xMapSize = 12;
-        int yMapSize = 12;
+        int xMapSize = 8;
+        int yMapSize = 8;
         int menuSelection;
 
         JOptionPane.showMessageDialog(null, "Welcome to Battleships, captain!");
@@ -27,7 +28,7 @@ public class Main {
 
             if (menuSelection == 1) {
                 //Create all maps through class: "Mapsson"
-                //Default map is 12x12 2D-array filled with: "~ ", which represents water.
+                //Default map is 8x8 2D-array filled with: "~ ", which represents water.
                 Mapsson playerOneMap = new Mapsson(1, xMapSize, yMapSize);
                 Mapsson playerTwoMap = new Mapsson(2, xMapSize, yMapSize);
                 Mapsson playerOneHitScanMap = new Mapsson(1, xMapSize, yMapSize);
@@ -38,23 +39,39 @@ public class Main {
 
                 //Initializes ship placement phase.
                 if (gameModeCPU) {
-
+                    game.placementPhase(input, playerOneMap);
+                    game.placementPhaseCPU(input, playerTwoMap);
                 } else {
                     game.placementPhase(input, playerOneMap);
                     game.placementPhase(input, playerTwoMap);
                 }
 
-                //Runs attackPhase-method until a player wins. Alternates between player one and player two.
-                while (true) {
-                    game.attackPhase(input, playerOneMap, playerOneHitScanMap, playerTwoMap);
-                    if (game.winCondition(Game.getPlayerOneHitCount())) {
-                        break;
+                //Runs attackPhase-method until a player wins. Alternates between Player 1 and Player 2/CPU.
+                if (gameModeCPU) {
+                    while (true) {
+                        game.attackPhase(input, playerOneMap, playerOneHitScanMap, playerTwoMap);
+                        if (game.winCondition(Game.getPlayerOneHitCount())) {
+                            break;
+                        }
+                        game.attackPhaseCPU(playerTwoMap, playerTwoHitScanMap, playerOneMap);
+                        if (game.winCondition(Game.getPlayerTwoHitCount())) {
+                            break;
+                        }
                     }
-                    game.attackPhase(input, playerTwoMap, playerTwoHitScanMap, playerOneMap);
-                    if (game.winCondition(Game.getPlayerTwoHitCount())) {
-                        break;
+
+                } else {
+                    while (true) {
+                        game.attackPhase(input, playerOneMap, playerOneHitScanMap, playerTwoMap);
+                        if (game.winCondition(Game.getPlayerOneHitCount())) {
+                            break;
+                        }
+                        game.attackPhase(input, playerTwoMap, playerTwoHitScanMap, playerOneMap);
+                        if (game.winCondition(Game.getPlayerTwoHitCount())) {
+                            break;
+                        }
                     }
                 }
+
             } else if (menuSelection == 2) {
                 if (gameModeCPU) {
                     gameModeCPU = false;
@@ -79,9 +96,9 @@ public class Main {
                 break;
             }
 
-            //Set map-size. (Default is 12 x 12)
+            //Set map-size. (Default is 8 x 8)
             if (mapsize) {
-                System.out.println("Map Size: (Default 12 x 12)");
+                System.out.println("Map Size: (Default 8 x 8)");
                 System.out.print("X: ");
                 xMapSize = input.nextInt();
                 System.out.print("Y: ");
@@ -94,7 +111,7 @@ public class Main {
 
         }
 
-        System.out.println();
+        System.out.println("Test: endmain");
     }
 
 
