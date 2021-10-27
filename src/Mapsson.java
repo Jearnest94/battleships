@@ -1,8 +1,8 @@
 /**
  * Map-class
- * Contains x-size, y-size, 2d String array and player ID
+ * Contains x-size, y-size, 2-D String array and player ID
+ * Constructor fills map with waves/water(~ )
  */
-
 public class Mapsson {
 
     private final int xSize;
@@ -27,15 +27,12 @@ public class Mapsson {
     public String[][] getMap() {
         return map;
     }
-
     public int getPlayerID() {
         return playerID;
     }
-
     public int getxSize() {
         return xSize;
     }
-
     public int getySize() {
         return ySize;
     }

@@ -6,7 +6,6 @@ public class Ship {
     private int yPos;
     private String orientation;
 
-
     /**
      * Ship object contains:
      * @param symbol Ship symbol
@@ -38,7 +37,6 @@ public class Ship {
     public String getOrientation() {
         return orientation;
     }
-
     public void setXPos(int xPos) {
         this.xPos = xPos;
     }

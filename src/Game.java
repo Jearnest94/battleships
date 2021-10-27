@@ -24,18 +24,19 @@ public class Game {
         this.playerTwoHitCount = hitCount;
     }
 
+    /**
+     * Win condition method that returns boolean.
+     */
     public boolean winCondition(int hitCount) {
-        if (hitCount < 3) {
+        if (hitCount < 9) {
             return false;
         } else
             return true;
     }
 
-
     /**
      * Placement phase method.
-     *
-     * @param input     Scanner
+     * Creates 3 ships and forces player to place each one on the map
      * @param playerMap Player map. Used for placing the ships on the map
      */
     public void placementPhase(Scanner input, Mapsson playerMap) {
@@ -53,34 +54,44 @@ public class Game {
             placeShip(input, ship, playerMap);
         }
         Utilities.pressEnter();
-
     }
 
+    /**
+     * Ship placement method
+     * @param ship used for setting x, y and ship orientation through input
+     * @param playerMap
+     */
     private void placeShip(Scanner input, Ship ship, Mapsson playerMap) {
         //Set ship coordinates.
         System.out.println("<Player " + playerMap.getPlayerID() + "> Placement Turn");
-        System.out.print("Ship: ");
-        for (int i = 0; i < ship.getLength(); i++) {
-            System.out.print(ship.getSymbol());
-        }
-        System.out.println();
-        System.out.print("X: ");
-        ship.setXPos(input.nextInt() - 1);
-        System.out.print("Y: ");
-        ship.setYPos(input.nextInt() - 1);
 
-        //Set Horizontal/Vertical.
-        System.out.println("Set orientation:");
-        System.out.println("1) Horizontal");
-        System.out.println("2) Vertical");
-        int select = input.nextInt();
-        if (select == 1) {
-            ship.setOrientation("Horizontal");
-        } else {
-            ship.setOrientation("Vertical");
+        try {
+            System.out.print("Ship: ");
+            for (int i = 0; i < ship.getLength(); i++) {
+                System.out.print(ship.getSymbol());
+            }
+            System.out.println();
+            System.out.print("X: ");
+            ship.setXPos(input.nextInt() - 1);
+            System.out.print("Y: ");
+            ship.setYPos(input.nextInt() - 1);
+
+            //Set Horizontal/Vertical.
+            System.out.println("Set orientation:");
+            System.out.println("1) Horizontal");
+            System.out.println("2) Vertical");
+            int select = input.nextInt();
+            if (select == 1) {
+                ship.setOrientation("Horizontal");
+            } else {
+                ship.setOrientation("Vertical");
+            }
+        } catch(Exception E) {
+            System.out.println("Invalid Input.");
+            Utilities.pressEnter();
         }
 
-        //Check if ship placement is valid, else try again
+        //Check if ship placement is valid then place ship, else try again
         if (playerMap.addShip(ship)) {
             playerMap.addShip(ship);
             Utilities.printArray(playerMap.getMap());
@@ -95,7 +106,6 @@ public class Game {
 
     /**
      * Attack phase method. This is where most of the game runs.
-     *
      * @param input      Scanner
      * @param playerMap  Player map. Used for Player ID in this case.
      * @param hitScanMap Enemy map without enemy ships.
@@ -103,6 +113,8 @@ public class Game {
      */
     public void attackPhase(Scanner input, Mapsson playerMap, Mapsson hitScanMap, Mapsson enemyMap) {
         boolean playerTurn = true;
+
+        //Player turn. Asks for coordinates to Fire at.
         while (playerTurn) {
             System.out.println();
             System.out.println("<Player " + playerMap.getPlayerID() + "> Bomb Turn");
@@ -144,7 +156,7 @@ public class Game {
                     Utilities.printArray(hitScanMap.getMap());
                     Utilities.pressEnter();
 
-                    //Bomb misses ship. This will end players turn.
+                    //Bomb misses ship. This will end player turn.
                 } else if (enemyMap.getMap()[yBomb][xBomb].matches("~ ")) {
                     Utilities.playSound("FireSplash.wav");
                     System.out.println("Miss!");
@@ -165,6 +177,10 @@ public class Game {
 
     }
 
+    /**
+     * The classes below are same as above but for CPU.
+     * Random numbers are used for Fire and Placement.
+     */
     public void placementPhaseCPU(Scanner input, Mapsson playerMap) {
         //Create the 3 different ship types.
         Ship shipA = new Ship("@ ", 0, 0, 5, "");
@@ -179,7 +195,6 @@ public class Game {
         for (Ship ship : shipList) {
             placeShipCPU(ship, playerMap);
         }
-
     }
 
     private void placeShipCPU(Ship ship, Mapsson playerMap) {

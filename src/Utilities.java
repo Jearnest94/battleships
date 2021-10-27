@@ -8,8 +8,8 @@ import java.util.Scanner;
 public class Utilities {
 
     /**
-     *
      * @param arr Prints 2 dimensional array.
+     * Used for displaying the map.
      */
     public static void printArray(String[][] arr) {
         for (int i = 0; i < arr.length; i++) {
@@ -31,7 +31,6 @@ public class Utilities {
     }
 
     /**
-     *
      * @param musicLocation Plays sound file in specified directory.
      */
     public static void playSound(String musicLocation){
